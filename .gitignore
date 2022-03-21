@@ -1,0 +1,6 @@
+commands/*.*
+!commands/.gitkeep
+test/*.*
+test/.gitkeep
+vendor/
+composer.lock
