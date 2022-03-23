@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-21 20:38:20
- * @modify date 2022-03-21 20:45:01
+ * @modify date 2022-03-23 08:25:59
  * @license GPLv3
  * @desc [description]
  */
@@ -14,14 +14,32 @@ abstract class Console implements Contract
 {
     protected array $commandClass;
 
+    use Output\Utils;
+
     /**
      * Register command
      *
      * @return void
      */
-    public function register(string $commandSignature, string $commandClass)
+    public function register(array $commands)
     {
-        $this->commandClass[$commandSignature] = $commandClass;
+        foreach ($commands as $signature => $class) {
+            $this->commandClass[$signature] = $class;
+        }
+    }
+
+    /**
+     * Retrive data from command class
+     *
+     * @param string $name
+     * @return void
+     */
+    public function __get($name)
+    {
+        if (array_key_exists($name, $this->commandClass))
+        {
+            return $this->commandClass[$name];
+        }
     }
 
     /**
@@ -29,7 +47,5 @@ abstract class Console implements Contract
      *
      * @return value
      */
-    public function run(string $commandSignature)
-    {
-    }
+    public function run(){}
 }

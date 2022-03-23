@@ -1,6 +1,8 @@
 commands/*.*
 !commands/.gitkeep
 test/*.*
-test/.gitkeep
+!test/.gitkeep
+!test/pinko.php
+!test/commands.php
 vendor/
 composer.lock

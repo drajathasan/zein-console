@@ -9,7 +9,8 @@
     "autoload": {
         "psr-4": {
             "Zein\\Console\\": "src/",
-            "Commands\\": "commands/"
+            "Commands\\": "commands/",
+	        "App\\": "app/"
         }
     },
     "authors": [
