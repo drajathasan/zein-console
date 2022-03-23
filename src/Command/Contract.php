@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 12:24:27
- * @modify date 2022-03-23 10:43:38
+ * @modify date 2022-03-23 10:51:08
  * @license GPLv3
  * @desc [description]
  */
@@ -74,7 +74,7 @@ abstract class Contract
 
         return $this->getOptionValue(array_values(array_filter($this->options, function($option) use($key) {
             if (preg_match('/' . $key . '/i', $option)) return true;
-        }))[0]??null);
+        }))[0]??'');
     }
 
     /**
