@@ -8,17 +8,18 @@ Directory structure
 app
 ---- AppConsole.php
 commands
----- YourCommand.php
+---- Make.php
 app.php
+composer.json
 vendor
 ```
-#### yourCommand.php
+#### Make.php
 ```PHP
 <?php
 namespace Commands;
 use Zein\Console\Command\Contract;
 
-class YourCommand extends Contract
+class Make extends Contract
 {
     protected array $signatures = [
         'make:plugin' => ['description' => 'Make a plugin', 
@@ -92,7 +93,9 @@ use App\AppConsole;
 require __DIR__ . '/vendor/autoload.php';
 
 $AppConsole = new AppConsole;
-$AppConsole->register(require __DIR__ . '/commands.php');
+$AppConsole->register([
+    'make' => \Commands\Make::class,
+]);
 
 $AppConsole->run();
 
