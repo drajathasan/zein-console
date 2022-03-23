@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 12:24:27
- * @modify date 2022-03-23 10:10:47
+ * @modify date 2022-03-23 10:39:49
  * @license GPLv3
  * @desc [description]
  */
@@ -90,8 +90,8 @@ abstract class Contract
         if (empty($key)) return $this->arguments;
 
         try {
-            $signature = $this->arguments[0]??null;
             $arguments = array_values($this->arguments);
+            $signature = $arguments[0]??null;
 
             if (!isset($this->signatures[$signature])) throw new Exception("Signature not avalialble");
 
