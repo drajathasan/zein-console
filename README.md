@@ -3,14 +3,16 @@
 library for running php in cli. Inspired from symphony/console.
 
 ### How to
-Directory structure
+Before you start to use this library, please make your autoload.php
+to make App and Commands namespace.
+
+#### Directory structure
 ```
 app
 ---- AppConsole.php
 commands
 ---- Make.php
 app.php
-composer.json
 vendor
 ```
 #### Make.php
