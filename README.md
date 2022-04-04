@@ -24,7 +24,7 @@ use Zein\Console\Command\Contract;
 class Make extends Contract
 {
     protected array $signatures = [
-        'make:plugin' => ['description' => 'Make a plugin', 
+        'make:plugin' => ['description' => 'Make a plugin', 'input' => '{pluginname}']
     ];
     
     protected array $options = [

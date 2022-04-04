@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 12:24:27
- * @modify date 2022-03-23 11:16:18
+ * @modify date 2022-04-04 21:00:57
  * @license GPLv3
  * @desc [description]
  */
@@ -66,15 +66,29 @@ abstract class Contract
      * @param string $key
      * @return array|string
      */
-    public function option(string $key = '')
+    public function option(string $key)
     {
-        if (empty($key)) return $this->options;
+        try {
+            $key = '--' . trim($key, '-');
 
-        $key = '--' . trim($key, '-');
+            if (!isset($this->options[$key])) throw new Exception("{$key} option is not registered!");
 
-        return $this->getOptionValue(array_values(array_filter($this->options, function($option) use($key) {
-            if (preg_match('/' . $key . '/i', $option)) return true;
-        }))[0]??'');
+            return $this->getOptionValue(array_values(array_filter($this->options, function($option) use($key) {
+                if (preg_match('/' . $key . '/i', $option)) return true;
+            }))[0]??'');
+
+        } catch (Exception $e) {
+            \Zein\Console\Output\Output::danger($e->getMessage());
+        }
+    }
+
+    /**
+     * Return all options
+     * @return value
+     */
+    public function options()
+    {
+        return $this->options;
     }
 
     /**
@@ -109,5 +123,16 @@ abstract class Contract
         } catch (Exception $e) {
             \Zein\Console\Output\Output::danger($e->getMessage());
         }
+    }
+
+    /**
+     * Get all arguments
+     *
+     * @return value
+     */
+    public function arguments()
+    {
+        unset($this->arguments[0]);
+        return array_values($this->arguments);
     }
 }
