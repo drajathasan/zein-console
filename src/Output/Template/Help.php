@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 11:51:20
- * @modify date 2022-03-23 08:29:21
+ * @modify date 2022-04-04 22:03:14
  * @license GPLv3
  * @desc [description]
  */
@@ -19,8 +19,15 @@ use Zein\Console\Output\{Output,Colors,Utils};
 
 class Help
 {
+    protected static string $header;
+
     use Colors,Utils;
     
+    public static function setHeader(string $header)
+    {
+        static::$header = trim($header);
+    }
+
     public static function render($lists)
     {
         $Help = new static;
@@ -28,6 +35,12 @@ class Help
         ob_start();
 
         echo $Help->setNewLine();
+
+        if (isset(static::$header))
+        {
+            echo static::$header;
+            echo $Help->setNewLine(2);
+        }
 
         // Usage
         echo $Help->warningColor('Usage') . $Help->normal() . $Help->setNewLine();
