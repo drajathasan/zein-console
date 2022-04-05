@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 11:26:39
- * @modify date 2022-03-23 07:28:24
+ * @modify date 2022-04-05 12:53:27
  * @license GPLv3
  * @desc [description]
  */
@@ -13,7 +13,7 @@ use Zein\Console\{Console,Argument,Output\Output};
 
 class Pinko extends Console
 {
-    private object $argument;
+    protected object $argument;
 
     public function __construct()
     {
