@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-22 12:24:27
- * @modify date 2022-04-04 21:00:57
+ * @modify date 2022-04-05 10:59:51
  * @license GPLv3
  * @desc [description]
  */
@@ -20,6 +20,11 @@ abstract class Contract
      * @var array
      */
     protected array $signatures = [];
+
+    /**
+     * Registered options
+     */
+    protected array $commandOptions = [];
 
     /**
      * Option list
@@ -71,7 +76,7 @@ abstract class Contract
         try {
             $key = '--' . trim($key, '-');
 
-            if (!isset($this->options[$key])) throw new Exception("{$key} option is not registered!");
+            if (!isset($this->commandOptions[$key])) throw new Exception("{$key} option is not registered!");
 
             return $this->getOptionValue(array_values(array_filter($this->options, function($option) use($key) {
                 if (preg_match('/' . $key . '/i', $option)) return true;
