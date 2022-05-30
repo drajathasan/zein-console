@@ -27,7 +27,7 @@ class Make extends Contract
         'make:plugin' => ['description' => 'Make a plugin', 'input' => '{pluginname}']
     ];
     
-    protected array $options = [
+    protected array $commandOptions = [
         '--type' => 'Set plugin type'
     ];
 
