@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-21 20:38:20
- * @modify date 2022-03-23 08:25:59
+ * @modify date 2022-10-02 21:48:49
  * @license GPLv3
  * @desc [description]
  */
@@ -12,7 +12,7 @@ namespace Zein\Console;
 
 abstract class Console implements Contract
 {
-    protected array $commandClass;
+    protected array $commandClass = [];
 
     use Output\Utils;
 
