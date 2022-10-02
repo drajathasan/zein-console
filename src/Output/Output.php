@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2022-03-21 20:51:19
- * @modify date 2022-04-04 22:04:26
+ * @modify date 2022-04-07 07:47:43
  * @license GPLv3
  * @desc [description]
  */
@@ -39,14 +39,14 @@ class Output
     {
         $Output = new Static;
 
-        $message = 
+        $formatedMessage = 
             $Output->setNewLine() . 
             $Output->infoColor($header) .
             $Output->setNewLine(2) .
-            $Output->normal($message) .
+            $Output->normal($Output->isCliOrWeb($message, true)) .
             $Output->setNewLine(2);
 
-        $Output->stop($message);
+        $Output->stop($formatedMessage);
     }
 
     /**
@@ -60,7 +60,7 @@ class Output
     {
         $Output = new Static;
 
-        $Output->stop($Output->successColor($message) . $Output->normal());
+        $Output->stop($Output->successColor($Output->isCliOrWeb($message, true)) . $Output->normal());
     }
 
     /**
@@ -72,7 +72,7 @@ class Output
     public static function warning(string $message)
     {
         $Output = new Static;
-        $Output->stop($Output->successColor($message) . $Output->normal());
+        $Output->stop($Output->successColor($Output->isCliOrWeb($message, false)) . $Output->normal());
     }
 
     /**
@@ -85,14 +85,32 @@ class Output
     {
         $Output = new Static;
 
-        $message = 
+        $formatedMessage = 
             $Output->setNewLine() . 
             $Output->dangerColor('Error:') .
             $Output->setNewLine(2) .
-            $Output->normal($message) .
+            $Output->normal($Output->isCliOrWeb($message, false)) .
             $Output->setNewLine(2);
 
-        $Output->stop($message);
+        $Output->stop($formatedMessage);
+    }
+
+    /**
+     * Check environment first for difference 
+     * result
+     *
+     * @param string $message
+     * @param boolean $status
+     * @return string
+     */
+    private function isCliOrWeb(string $message, bool $status)
+    {
+        if (php_sapi_name() !== 'cli')
+        {
+            $this->stopAsJson(['status' => $status, 'message' => $message]);
+        }
+
+        return $message;
     }
 
     /**
@@ -104,6 +122,17 @@ class Output
     private function stop(string $formatedOutput){
         echo $formatedOutput;
         echo $this->setNewLine();
+        exit;
+    }
+
+    /**
+     * Stop process in web environment
+     * with json as default format
+     */
+    private function stopAsJson(array $data)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
         exit;
     }
 }
